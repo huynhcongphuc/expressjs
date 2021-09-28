@@ -1,0 +1,26 @@
+{
+  "name": "expressjs",
+  "version": "1.0.0",
+  "description": "testing",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/huynhcongphuc/expressjs.git"
+  },
+  "keywords": [
+    "expressjs"
+  ],
+  "author": "huynh cong phuc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/huynhcongphuc/expressjs/issues"
+  },
+  "homepage": "https://github.com/huynhcongphuc/expressjs#readme"
+}
