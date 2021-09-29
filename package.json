@@ -2,16 +2,21 @@
   "name": "expressjs",
   "version": "1.0.0",
   "description": "testing",
-  "main": "index.js",
+  "main": "src\\index.js",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.4"
   },
   "devDependencies": {
+    "morgan": "^1.10.0",
+    "node-scss": "^7.0.3",
     "nodemon": "^2.0.13"
   },
   "scripts": {
-    "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon src\\index.js",
+    "watch": "node-sass -w src/resources/scss -o src/public/css",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently --kill-others \"nodemon src\\index.js\" \"node-sass -w src/resources/scss -o src/public/css\""
   },
   "repository": {
     "type": "git",
