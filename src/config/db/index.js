@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-var DBConfig = require('../../../dbconfig.json');
+var DBConfig = require('./dbconfig.json');
 
 
 const uri = DBConfig.mongodbUri;
