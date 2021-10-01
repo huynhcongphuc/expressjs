@@ -36,10 +36,17 @@ class coursecontroller {
             .catch(next);
     }
 
-    // [POST] /course/:id
+    // [POST] /update/:id
     update(req, res, next) {
         dbcourse.updateOne({ _id: req.params.id }, req.body)
             .then(() => res.redirect('/me/stored/course'))
+            .catch(next)
+    }
+
+    // [POST] /delete/:id
+    delete(req, res, next) {
+        dbcourse.deleteOne({ _id: req.params.id })
+            .then(() => res.redirect('back'))
             .catch(next)
     }
 
