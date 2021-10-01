@@ -4,8 +4,12 @@
   "description": "testing",
   "main": "src\\index.js",
   "dependencies": {
+    "concurrently": "^6.2.2",
     "express": "^4.17.1",
-    "express-handlebars": "^5.3.4"
+    "express-handlebars": "^5.3.4",
+    "method-override": "^3.0.0",
+    "mongoose": "^6.0.8",
+    "mongoose-slug-generator": "^1.0.4"
   },
   "devDependencies": {
     "morgan": "^1.10.0",
