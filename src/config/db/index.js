@@ -1,14 +1,16 @@
 const mongoose = require('mongoose');
+var DBConfig = require('../../../dbconfig.json');
 
 
-const uri = "mongodb+srv://Mongodb:PuHh1234@cluster0.y7au8.mongodb.net/MongoDB?retryWrites=true&w=majority";
+const uri = DBConfig.mongodbUri;
 
 async function connect(connectionString) {
     try {
         await mongoose.connect(uri,);
         console.log("Mongo DB Connected");
     } catch (error) {
-        hconsole.log(`Faile: ${error}`);
+        console.log(DBConfig);
+        console.log(`Faile: ${error}`);
     }
 
 }
