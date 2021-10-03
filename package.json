@@ -19,7 +19,7 @@
   },
   "scripts": {
     "debug": "nodemon --inspect src\\index.js",
-    "start": "node src\\index.js",
+    "start": "node ./src/index.js",
     "startmon": "nodemon src\\index.js",
     "watch": "node-sass -w src/resources/scss -o src/public/css",
     "test": "echo \"Error: no test specified\" && exit 1",
