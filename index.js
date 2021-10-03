@@ -4,9 +4,9 @@ const expresshandle = require('express-handlebars');
 const app = express();
 const port = 5000;
 
-const route = require('./routes/index.js')
+const route = require('./src/routes/index.js')
 //connect db
-const db = require('./config/db/index.js')
+const db = require('./src/config/db/index.js')
 db.connect();
 
 //http logger

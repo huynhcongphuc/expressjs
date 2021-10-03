@@ -18,9 +18,9 @@
     "nodemon": "^2.0.13"
   },
   "scripts": {
-    "debug": "nodemon --inspect src\\index.js",
-    "start": "node ./src/index.js",
-    "startmon": "nodemon src\\index.js",
+    "debug": "nodemon --inspect index.js",
+    "start": "node index.js",
+    "startmon": "nodemon index.js",
     "watch": "node-sass -w src/resources/scss -o src/public/css",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently --kill-others \"nodemon src\\index.js\" \"node-sass -w src/resources/scss -o src/public/css\""
