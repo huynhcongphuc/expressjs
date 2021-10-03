@@ -2,7 +2,7 @@ const dbcourse = require('../models/course')
 const ultimongoObject = require('../../ulti/mongoose.js');
 
 class coursecontroller {
-    //GET /course/:slug
+    //GET /course/:slug tìm các slug param trong db để show course tương ứng
     show(req, res, next) {
 
         dbcourse.findOne({ slug: req.params.slug })
@@ -12,7 +12,7 @@ class coursecontroller {
             .catch(next);
     }
 
-    //create new course
+    //create new course 
     create(req, res, next) {
 
         res.render('course/create');

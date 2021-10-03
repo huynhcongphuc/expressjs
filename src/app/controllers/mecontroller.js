@@ -2,10 +2,11 @@ const dbcourse = require('../models/course')
 const ultimongoObject = require('../../ulti/mongoose.js');
 
 
-class coursecontroller {
+class mecontroller {
     //GET /course/:slug
     storedcourse(req,res, next){
-        dbcourse.find({})
+
+        dbcourse.find({}).sortable(req)
             .then(course => {
                 res.render('me/storedcourse',{course: ultimongoObject.multiMongoObject(course)})
             })
@@ -21,4 +22,4 @@ class coursecontroller {
     }
 }
 
-module.exports = new coursecontroller;
+module.exports = new mecontroller;

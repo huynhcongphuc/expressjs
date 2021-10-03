@@ -19,9 +19,15 @@
                 <tr>
                     <th scope="col"></th>
                     <th scope="col">#</th>
-                    <th scope="col">Tên Khóa học</th>
-                    <th scope="col">Trình độ</th>
-                    <th scope="col" colspan="2">Thời gian tạo</th>
+                    <th scope="col">Tên Khóa học
+                        {{{sortable 'name' _sort}}}
+                    </th>
+                    <th scope="col">Trình độ
+                        {{{sortable 'level' _sort}}}
+                    </th>
+                    <th scope="col" colspan="2">Thời gian tạo
+                        {{{sortable 'createdAt' _sort}}}
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -83,7 +89,7 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        
+
         var recipient;
         var deleteform = document.forms['formdelete']
 
@@ -120,9 +126,9 @@
         //active button thực hiện
         function CheckActive() {
             if ($('input[name="courseid[]"]:checked').length > 0) {
-                $('#doAll').css('display','block');
+                $('#doAll').css('display', 'block');
             } else {
-                $('#doAll').css('display','none');
+                $('#doAll').css('display', 'none');
             }
         }
 

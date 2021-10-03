@@ -15,6 +15,20 @@ const course = Schema({
 }, {
     timestamps: true
 });
+//custom querry sort dbcourse
+
+course.query.sortable = function(req){
+    if(req.query.hasOwnProperty('_sort')){
+        const isValidtype = ['asc','desc'].includes(req.query.type);
+        return this.sort({
+            [req.query.column]: isValidtype ? req.query.type : 'desc'
+        });
+    }else{
+        return this
+    }
+}
+
+
 
 //add cac thu vien
 mongoose.plugin(slug);
