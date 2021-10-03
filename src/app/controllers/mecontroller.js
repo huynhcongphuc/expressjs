@@ -11,6 +11,14 @@ class coursecontroller {
             })
             .catch(next)
     }
+
+    storedtrash(req,res, next){
+        dbcourse.findDeleted({})
+            .then(course => {
+                res.render('me/trashcourse',{course: ultimongoObject.multiMongoObject(course)})
+            })
+            .catch(next)
+    }
 }
 
 module.exports = new coursecontroller;

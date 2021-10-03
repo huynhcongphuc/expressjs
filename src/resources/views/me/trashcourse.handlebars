@@ -1,17 +1,19 @@
-<form class="container mt-4" name="containerform" method="post" action="/course/handleform">
-
-    <h3>Khóa học của tôi</h3>
-    <a href="/me/trash/course">Thùng rác của tôi</a>
+<form class="container mt-4" name="containerform" method="post" action="/course/handletrash">
+    <a href="/me/stored/course">Danh sách khóa học</a>
+    <h3>Thùng rác của tôi</h3>
     <div class="my-3 d-flex align-items-center">
         <div class="form-check">
             <input type="checkbox" class="form-check-input" id="checkall">
             <label class="form-check-label" for="checkall">Chọn tất cả</label>
         </div>
-        <select class="form-control" name="action" style="width:120px; margin: 0 10px" required>
+        <select class="form-control" name="action" style="width:140px; margin: 0 10px" required>
             <option value="">--Option--</option>
-            <option value="delete">Xóa</option>
+            <option value="restore">Khôi phục</option>
+            <option value="forcedelete">Xóa vĩnh viễn</option>
         </select>
-        <button type="submit" class="btn btn-primary" id="doAll">Thực hiện</button>
+        {{!-- <button type="submit" class="btn btn-primary" id="doAll">Thực hiện</button> --}}
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#containerformModal" id="doAll">Thực
+            hiện</button>
     </div>
     <div class="row">
         <table class="table table-striped">
@@ -37,16 +39,16 @@
                     <td>{{this.level}}</td>
                     <td>{{this.createdAt}}</td>
                     <td>
-                        <a href="/course/{{this._id}}/edit" class="btn btn-primary">Sửa</a>
+                        <a href="" class="btn btn-primary btnrestored" data-id="{{this._id}}">Khôi phục</a>
                         <button type="button" class="btn btn-danger" data-id="{{this._id}}" data-toggle="modal"
-                            data-target="#exampleModal">Xóa</button>
+                            data-target="#exampleModal">Xóa vĩnh viễn</button>
                     </td>
                 </tr>
                 {{else}}
                 <tr>
                     <td colspan="5" class="text-center">
-                        Bạn chưa đăng khóa học nào!
-                        <a href="/course/create">Đăng khóa học ngay!</a>
+                        Thùng rác trống!
+                        <a href="/me/stored/course">Danh sách khóa học</a>
                     </td>
                 </tr>
                 {{/each}}
@@ -54,6 +56,28 @@
         </table>
     </div>
 </form>
+
+<!-- Modal formselect-->
+<div class="modal fade" id="containerformModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="containerformModalLabel">Xóa môn học</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc muốn thực thi? Nếu là hành động xóa thì Không thể khôi phục dữ liệu!
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+                <button id="btncontainerform" type="button" class="btn btn-danger">Thực thi!!!</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -67,25 +91,26 @@
                 </button>
             </div>
             <div class="modal-body">
-                Bạn có chắc muốn xóa?
+                Bạn có chắc muốn xóa? Không thể khôi phục dữ liệu!
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
-                <button id="buttondelete" type="button" class="btn btn-danger">Xóa bỏ</button>
+                <button id="buttondelete" type="button" class="btn btn-danger">Xóa vĩnh viễn</button>
             </div>
         </div>
     </div>
 </div>
 
-
 {{!-- Form delete ẩn --}}
 <form name="formdelete" method="post" action=""></form>
-
+{{!-- Form restore ẩn --}}
+<form name="formrestore" method="post" action=""></form>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        
         var recipient;
         var deleteform = document.forms['formdelete']
+
+        var btnRestored = $('.btnrestored');
 
         $('#exampleModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);// Button that triggered the modal
@@ -94,10 +119,18 @@
 
         var btnDeleteCourse = document.getElementById('buttondelete');
         btnDeleteCourse.onclick = function () {
-            deleteform.method = "post";
-            deleteform.action = "/course/delete/" + recipient;
+            deleteform.action = "/course/deleteforce/" + recipient;
             deleteform.submit();
         }
+
+        btnRestored.click(function (e) {
+            e.preventDefault();
+            var courseidRestored = $(this).data('id');
+            var restoreform = document.forms['formrestore']
+            restoreform.action = "/course/restore/" + courseidRestored;
+            restoreform.submit();
+        })
+
         CheckActive();
 
         //checkbox
@@ -120,12 +153,18 @@
         //active button thực hiện
         function CheckActive() {
             if ($('input[name="courseid[]"]:checked').length > 0) {
-                $('#doAll').css('display','block');
+                $('#doAll').css('display', 'block');
             } else {
-                $('#doAll').css('display','none');
+                $('#doAll').css('display', 'none');
             }
         }
 
         CheckActive();
+
+        //confirm modal select
+        var btncontainerform = document.getElementById('btncontainerform');
+        btncontainerform.onclick = function () {
+            containerform.submit();
+        }
     })
 </script>

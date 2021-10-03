@@ -24,7 +24,7 @@ class coursecontroller {
         formdata.image = `https://img.youtube.com/vi/${req.body.videoid}/sddefault.jpg`
         const course = new dbcourse(req.body);
         course.save()
-            .then(() => res.redirect('/'))
+            .then(() => res.redirect('/me/stored/course'))
             .catch(error => { })
     }
 
@@ -44,10 +44,62 @@ class coursecontroller {
     }
 
     // [POST] /delete/:id
+    // delete(req, res, next) {
+    //     dbcourse.deleteOne({ _id: req.params.id })
+    //         .then(() => res.redirect('back'))
+    //         .catch(next)
+    // }
+
+    // [POST] /delete/:id -> softdelete
     delete(req, res, next) {
+        dbcourse.delete({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next)
+    }
+
+    restore(req, res, next) {
+        dbcourse.restore({ _id: req.params.id })
+            .then(() => res.redirect('back'))
+            .catch(next)
+    }
+
+    // [POST] /delete/:id -> softdelete
+    deleteforce(req, res, next) {
         dbcourse.deleteOne({ _id: req.params.id })
             .then(() => res.redirect('back'))
             .catch(next)
+    }
+
+
+
+    // [POST] /handleform/:id -> softdelete danh sách chọn
+    handleform(req, res, next) {
+
+        switch (req.body.action) {
+            case 'delete':
+                dbcourse.delete({ _id: { $in: req.body.courseid } })
+                    .then(() => res.redirect('back'))
+                    .catch(next)
+                break;
+            default: res.redirect('/');
+        }
+    }
+
+    // [POST] /handletrash/[:id] -> restore danh sách chọn
+    handletrash(req, res, next) {
+        switch (req.body.action) {
+            case 'restore':
+                dbcourse.restore({ _id: { $in: req.body.courseid } })
+                    .then(() => res.redirect('back'))
+                    .catch(next)
+                break;
+            case 'forcedelete':
+                dbcourse.deleteOne({ _id: { $in: req.body.courseid } })
+                    .then(() => res.redirect('back'))
+                    .catch(next)
+                break;
+            default: res.redirect('/');
+        }
     }
 
 }
