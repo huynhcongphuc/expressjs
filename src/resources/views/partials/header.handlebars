@@ -9,22 +9,20 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="https://huynhcongphuc.work/">HCP work</a>
+                    <a class="nav-link text-danger" href="https://huynhcongphuc.work/">Go back HCP work</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="/img/logo.png"
-                            class="user-avatar">
-                        User
+                        <img src="/img/logo.png" class="user-avatar">
+                        {{user}}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/course/create">Đăng khóa học</a>
+                        <a class="dropdown-item" href="/course/create">Đăng bài viết</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/me/stored/course">Khóa học của tôi</a>
-                        <a class="dropdown-item" href="/me/stored/news">Bài viết của tôi</a>
+                        <a class="dropdown-item" href="/me/stored/course">Bài viết của tôi</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/logout">logout</a>
+                        <a class="dropdown-item" href="/loginout">{{button}}</a>
                     </div>
                 </li>
             </ul>
