@@ -8,6 +8,7 @@ const Schema = mongoose.Schema;
 const course = Schema({
     name: { type: String },
     description: { type: String },
+    content: { type: String },
     image: { type: String },
     videoid: { type: String },
     level: { type: String },

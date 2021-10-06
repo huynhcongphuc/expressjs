@@ -8,8 +8,7 @@ const authMiddleWare = require('../app/middlewares/authMiddleWare.js');
 function route(app) {
 
     app.use('/news', newsrouter);
-
-    app.use('/course', authMiddleWare.requireAuth, courserouter);
+    app.use('/course', courserouter);
     app.use('/me',authMiddleWare.requireAuth, merouter);
 
     app.post('/news', (req, res) => {

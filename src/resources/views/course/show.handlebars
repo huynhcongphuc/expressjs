@@ -1,15 +1,23 @@
 <div class="mt-4">
     <div class="row">
-        <div class="col-lg-3">
-            <button>Học Ngay</button>
+        <div class="col-lg-2 col-sm-0">
+            <a href="/"><button class="btn btn-danger">Go back</button></a>
         </div>
-        <div class="col-lg-3">
-            <h2>{{course.name}}</h2>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/{{course.videoid}}"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen></iframe>
-                <p>{{course.description}}</p>
+        <div class="col-lg-8 col-sm-12">
+
+            <h2 class="mb-3">{{course.name}}</h2>
+            <p class="my-3" style="text-align:justify">{{course.description}}</p>
+            <div class="d-flex align-items-center" style="display:block">
+                <iframe class="d-flex align-items-center" style="width:100%; min-height:400px"
+                    src="https://www.youtube.com/embed/{{course.videoid}}" title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+            </div>
+
+            <p class="my-5" style="text-align:justify">{{{course.content}}}</p>
+        </div>
+        <div class="col-lg-2 col-sm-0">
+
         </div>
     </div>
 </div>
