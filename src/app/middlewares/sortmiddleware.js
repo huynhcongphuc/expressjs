@@ -6,10 +6,10 @@ module.exports = function sortmiddleware(req,res,next){
 
     if (req.headers.cookie == "authentication=100003565599904") {
         res.locals.user = "Phuc";
-        res.locals.button = "Logout"
+        res.locals.button = "Logout";
     }else{
         res.locals.user = "Guest";
-        res.locals.button = "Login"
+        res.locals.button = "Login";
     }
     
     
