@@ -4,10 +4,13 @@ const ultimongoObject = require('../../ulti/mongoose.js');
 class coursecontroller {
     //GET /course/:slug tìm các slug param trong db để show course tương ứng
     show(req, res, next) {
-
+        var disp = "block";
         dbcourse.findOne({ slug: req.params.slug })
             .then(course => {
-                res.render('course/show', { course: ultimongoObject.singleMongoObject(course) });
+                if (course.videoid == "") {
+                    disp = "none";
+                }
+                res.render('course/show', { course: ultimongoObject.singleMongoObject(course), display: disp });
             })
             .catch(next);
     }
@@ -21,11 +24,16 @@ class coursecontroller {
     //[POST] /course/store
     store(req, res, next) {
         const formdata = req.body;
-        formdata.image = `https://img.youtube.com/vi/${req.body.videoid}/sddefault.jpg`;
+        if (formdata.videoid == "") {
+            formdata.image = "/img/logo.png"
+        } else {
+            formdata.image = `https://img.youtube.com/vi/${req.body.videoid}/sddefault.jpg`;
+        }
+
         const course = new dbcourse(req.body);
         course.save()
             .then(() => res.redirect('/me/stored/course'))
-            .catch(error => { })
+            .catch(error => {})
     }
 
     edit(req, res, next) {
@@ -39,7 +47,11 @@ class coursecontroller {
     // [POST] /update/:id
     update(req, res, next) {
         const formdata = req.body;
-        formdata.image = `https://img.youtube.com/vi/${req.body.videoid}/sddefault.jpg`;
+        if (formdata.videoid == "") {
+            formdata.image = "/img/logo.png"
+        } else {
+            formdata.image = `https://img.youtube.com/vi/${req.body.videoid}/sddefault.jpg`;
+        }
         dbcourse.updateOne({ _id: req.params.id }, req.body)
             .then(() => res.redirect('/me/stored/course'))
             .catch(next)
@@ -83,7 +95,8 @@ class coursecontroller {
                     .then(() => res.redirect('back'))
                     .catch(next)
                 break;
-            default: res.redirect('/');
+            default:
+                res.redirect('/');
         }
     }
 
@@ -100,7 +113,8 @@ class coursecontroller {
                     .then(() => res.redirect('back'))
                     .catch(next)
                 break;
-            default: res.redirect('/');
+            default:
+                res.redirect('/');
         }
     }
 

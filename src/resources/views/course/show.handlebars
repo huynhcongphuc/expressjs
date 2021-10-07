@@ -7,17 +7,27 @@
 
             <h2 class="mb-3">{{course.name}}</h2>
             <p class="my-3" style="text-align:justify">{{course.description}}</p>
-            <div class="d-flex align-items-center" style="display:block">
-                <iframe class="d-flex align-items-center" style="width:100%; min-height:400px"
+            <div style="display:{{display}}">
+                <iframe id="youtube" class="d-flex align-items-center" style="width:100%; min-height:400px"
                     src="https://www.youtube.com/embed/{{course.videoid}}" title="YouTube video player" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen></iframe>
             </div>
 
-            <p class="my-5" style="text-align:justify">{{{course.content}}}</p>
+            <div class="my-5" style="text-align:justify">{{{course.content}}}</div>
         </div>
         <div class="col-lg-2 col-sm-0">
 
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var condition = {{course.videoid}};
+        $('#exampleModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);// Button that triggered the modal
+            recipient = button.data('id');
+        });
+    }
+</script>
