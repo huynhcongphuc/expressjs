@@ -1,7 +1,7 @@
 <div class="mt-4">
     <div class="row">
         {{#each course}}
-        <div class="col-sm-6 col-lg-4 mt-4">
+        <div class="col-lg-3 col-sm-4 mt-4">
             <div class="card car" style="width: 18rem;">
                 <a href="/course/{{this.slug}}">
                     <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}"></a>
@@ -12,6 +12,7 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-1 col-sm-2"></div>
         {{/each}}
     </div>
 </div>
